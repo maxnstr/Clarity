@@ -1,0 +1,161 @@
+/* Переменные для темной и светлой темы */
+:root {
+    --bg-color: #0d131a; /* Темный фон как на скрине */
+    --text-color: #f0f0f0;
+    --pill-border: rgba(255, 255, 255, 0.5);
+    --pill-bg: transparent;
+    --hover-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Класс для светлой темы (добавляется через JS) */
+body.light-theme {
+    --bg-color: #f4f6f8;
+    --text-color: #1a1a1a;
+    --pill-border: rgba(0, 0, 0, 0.3);
+    --hover-color: rgba(0, 0, 0, 0.05);
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s; /* Плавная смена темы */
+}
+
+/* НАВИГАЦИЯ */
+header {
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(10px); /* Легкое размытие под меню */
+    z-index: 100;
+}
+
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.icon-btn:hover {
+    background-color: var(--hover-color);
+}
+
+.icon-btn svg { width: 20px; height: 20px; }
+
+/* Капсула навигации */
+.nav-pill {
+    border: 1px solid var(--pill-border);
+    border-radius: 21px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0; /* УБИРАЕМ боковые отступы, теперь всё считается автоматически */
+    position: relative;
+    overflow: hidden;
+    width: 450px; /* Жестко фиксируем ширину капсулы (можете сделать больше/меньше) */
+    transition: border-color 0.3s;
+}
+
+.nav-categories {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    /* МАГИЯ ЗДЕСЬ: space-evenly делает равные отступы и по краям, и между словами */
+    justify-content: space-evenly; 
+    transition: opacity 0.2s;
+}
+
+.nav-categories a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 0; /* Убираем padding, чтобы отступы считались от самих букв */
+}
+
+/* Поле поиска внутри капсулы */
+.nav-search-input-wrapper {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: none; /* Скрыто по умолчанию */
+    align-items: center;
+    padding: 0 15px 0 20px;
+    background-color: var(--bg-color);
+}
+
+.nav-search-input-wrapper input {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+}
+
+.close-search-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.6;
+}
+.close-search-btn:hover { opacity: 1; }
+
+/* ГЛАВНЫЙ ЭКРАН (HERO) */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    max-width: 1000px;
+    margin: 0 auto;
+    gap: 60px;
+    padding: 0 20px;
+}
+
+.hero-logo {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Заглушка для вашего логотипа */
+.logo-placeholder {
+    width: 250px;
+    height: 250px;
+    background-color: #eee;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 120px;
+    font-weight: bold;
+    border-radius: 20px 50px 30px 60px; /* Имитация неровной формы бумажки */
+    transform: rotate(-5deg);
+}
+
+.hero-text {
+    flex: 1;
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.9;
+}

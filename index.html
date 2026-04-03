@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кларити</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Навигация -->
+    <header>
+        <div class="nav-wrapper">
+            <!-- Кнопка поиска -->
+            <button class="icon-btn" id="search-btn" aria-label="Поиск">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+
+            <!-- Центральная "капсула" -->
+            <div class="nav-pill" id="nav-pill">
+                <!-- Состояние 1: Категории -->
+                <div class="nav-categories" id="nav-categories">
+                    <a href="#os">OS</a>
+                    <a href="#proxy">Proxy & VPN</a>
+                    <a href="#video">Video</a>
+                    <a href="#audio">Audio</a>
+                </div>
+                
+                <!-- Состояние 2: Поиск (изначально скрыто) -->
+                <div class="nav-search-input-wrapper" id="nav-search-wrapper">
+                    <input type="text" id="search-input" placeholder="Поиск по тегам или названиям...">
+                    <button class="close-search-btn" id="close-search-btn">✕</button>
+                </div>
+            </div>
+
+            <!-- Кнопка смены темы -->
+            <button class="icon-btn" id="theme-btn" aria-label="Смена темы">
+                <!-- Иконка луны -->
+                <svg id="moon-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <!-- Иконка солнца (скрыта в темной теме) -->
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Главный экран -->
+    <main class="hero">
+        <!-- Блок для логотипа -->
+        <div class="hero-logo">
+            <!-- Сюда потом вставите свою картинку: <img src="logo.png" alt="Кларити"> -->
+            <div class="logo-placeholder">K.</div> 
+        </div>
+
+        <!-- Текст -->
+        <div class="hero-text">
+            <p><strong>Кларити</strong> — удобный агрегатор проверенных приложений и программ, которые пригодятся сразу после установки Windows. Здесь собраны необходимые инструменты для работы, учебы и повседневных задач — всё в одном месте, с быстрым доступом и краткими описаниями.</p>
+        </div>
+    </main>
+
+    <!-- Скрытые секции контента (появятся при скролле) -->
+    <section id="os" style="height: 100vh; padding: 50px;"><h2>OS Soft</h2></section>
+    <section id="proxy" style="height: 100vh; padding: 50px;"><h2>Proxy & VPN</h2></section>
+
+    <script src="script.js"></script>
+</body>
+</html>
