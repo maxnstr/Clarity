@@ -19,9 +19,10 @@
             <!-- Центральная "капсула" -->
             <div class="nav-pill" id="nav-pill">
                 <!-- Состояние 1: Категории -->
-                <div class="nav-categories" id="nav-categories">
+               <div class="nav-categories" id="nav-categories">
                     <a href="#os">OS</a>
                     <a href="#proxy">Proxy & VPN</a>
+                    <a href="#ai">AI</a>
                     <a href="#video">Video</a>
                     <a href="#audio">Audio</a>
                 </div>
@@ -160,7 +161,90 @@
         </div>
     </section>
     
-    <section id="proxy" style="height: 100vh; padding: 50px;"><h2>Proxy & VPN</h2></section>
+    <!-- Секция Proxy & VPN -->
+    <section id="proxy" class="content-section">
+        <h2>Proxy & VPN</h2>
+        <p class="section-description">Инструменты для обхода блокировок и безопасного серфинга в сети.</p>
+        
+        <div class="software-grid">
+           <div class="software-card card-wide">
+                <h3>Amnezia VPN</h3>
+                <p>Бесплатный клиент для создания собственного VPN на личном сервере.</p>
+                
+                <!-- Обертка для двух кнопок в ряд -->
+                <div class="btn-row">
+                    <a href="https://amnezia.org/ru" target="_blank" class="download-btn">Официальный сайт</a>
+                    <a href="https://github.com/amnezia-vpn/amneziawg-windows-client/releases" target="_blank" class="download-btn">AmneziaWG (GitHub)</a>
+                </div>
+                
+                <!-- Третья кнопка идет следом -->
+                <!-- Третья кнопка (добавили класс btn-outline) -->
+<a href="https://github.com/ImMALWARE/bash-warp-generator/blob/main/README.md" target="_blank" class="download-btn btn-outline">Генератор конфига Cloudflare WARP для AmneziaVPN.</a>
+            </div>
+
+            <div class="software-card">
+                <h3>hidemyname VPN</h3>
+                <p>Надежный VPN-сервис с хорошей скоростью и защитой конфиденциальности.</p>
+                <a href="https://hidethe.fun/" target="_blank" class="download-btn">Перейти на сайт</a>
+            </div>
+
+            <div class="software-card">
+                <h3>VPNLY</h3>
+                <p>Удобное и полностью бесплатное VPN-расширение для браузера.</p>
+                <a href="https://chromewebstore.google.com/detail/бесплатный-vpn-proxy-vpnl/lneaocagcijjdpkcabeanfpdbmapcjjg?hl=ru" target="_blank" class="download-btn">Установить расширение</a>
+            </div>
+
+            <div class="software-card">
+                <h3>Zapret</h3>
+                <p>Мощный инструмент для обхода DPI-блокировок (помогает с YouTube, Discord и др.).</p>
+                <a href="https://github.com/Flowseal/zapret-discord-youtube" target="_blank" class="download-btn">Скачать с GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция AI (Нейросети) -->
+    <section id="ai" class="content-section">
+        <h2>AI (Нейросети)</h2>
+        <p class="section-description">Языковые модели и инструменты на базе ИИ для работы, учебы и творчества.</p>
+        
+        <div class="software-grid">
+            <div class="software-card">
+                <h3>Google AI Studio</h3>
+                <p>Пространство для разработчиков и энтузиастов для работы с моделями Gemini.</p>
+                <a href="https://aistudio.google.com" target="_blank" class="download-btn">Открыть</a>
+            </div>
+
+            <div class="software-card">
+                <h3>NotebookLM</h3>
+                <p>Ваш персональный ИИ-ассистент для анализа документов и создания заметок (от Google).</p>
+                <a href="https://notebooklm.google" target="_blank" class="download-btn">Открыть</a>
+            </div>
+
+            <div class="software-card">
+                <h3>Google Stitch</h3>
+                <p>Экспериментальный ИИ-инструмент от Google для работы с кодом и текстом.</p>
+                <a href="https://stitch.withgoogle.com" target="_blank" class="download-btn">Открыть</a>
+            </div>
+
+            <div class="software-card">
+                <h3>Claude</h3>
+                <p>Мощная языковая модель от Anthropic, отлично понимающая контекст и большие тексты.</p>
+                <a href="https://claude.com" target="_blank" class="download-btn">Открыть</a>
+            </div>
+
+            <div class="software-card">
+                <h3>ChatGPT</h3>
+                <p>Самая популярная и универсальная языковая модель от компании OpenAI.</p>
+                <a href="https://chatgpt.com/" target="_blank" class="download-btn">Открыть</a>
+            </div>
+
+            <div class="software-card">
+                <h3>Suno AI</h3>
+                <p>Потрясающая нейросеть, способная генерировать полноценные песни по вашему описанию.</p>
+                <a href="https://suno.com/" target="_blank" class="download-btn">Открыть</a>
+            </div>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
