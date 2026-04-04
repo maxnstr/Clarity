@@ -1,17 +1,18 @@
 /* Переменные для темной и светлой темы */
 :root {
-    --bg-color: #141414; 
+    --bg-color: #09090b; 
     --text-color: #f0f0f0;
     --pill-border: rgba(255, 255, 255, 0.5);
-    --pill-bg: transparent;
+    --pill-bg: rgba(20, 20, 20, 0.55);
     --hover-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Класс для светлой темы (добавляется через JS) */
 body.light-theme {
-    --bg-color: #f4f6f8;
+    --bg-color: #fdfdf7;
     --text-color: #1a1a1a;
     --pill-border: rgba(0, 0, 0, 0.3);
+    --pill-bg: rgba(244, 246, 248, 0.6);
     --hover-color: rgba(0, 0, 0, 0.05);
 }
 
@@ -30,7 +31,6 @@ header {
     justify-content: center;
     position: sticky;
     top: 0;
-    backdrop-filter: blur(10px); /* Легкое размытие под меню */
     z-index: 100;
 }
 
@@ -40,6 +40,7 @@ header {
     gap: 20px;
 }
 
+/* --- 1. ИКОНОКИ --- */
 .icon-btn {
     background: none;
     border: none;
@@ -51,19 +52,25 @@ header {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: background-color 0.2s;
+    transition: transform 0.2s, color 0.15s;
+}
+
+/* Динамическая смена цвета — JS добавляет класс когда иконка над контрастным элементом */
+.icon-btn.on-light-bg {
+    color: var(--bg-color);
 }
 
 .icon-btn:hover {
-    background-color: var(--hover-color);
+    transform: scale(1.1);
 }
 
 .icon-btn svg { width: 20px; height: 20px; }
 
-/* Капсула навигации */
+
+/* --- 2. ИДЕАЛЬНЫЕ ПРОПОРЦИИ КАПСУЛЫ --- */
 .nav-pill {
     border: 1px solid var(--pill-border);
-    border-radius: 10px; 
+    border-radius: 12px; /* Сделали внешнее скругление чуть больше (было 10) */
     height: 30px;
     display: flex;
     align-items: center;
@@ -72,6 +79,11 @@ header {
     overflow: hidden;
     width: 520px;
     transition: border-color 0.3s;
+    
+    /* Стекло */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: var(--pill-bg);
 }
 
 .nav-categories {
@@ -79,16 +91,47 @@ header {
     width: 100%;
     height: 100%;
     align-items: center;
-    /* МАГИЯ ЗДЕСЬ: space-evenly делает равные отступы и по краям, и между словами */
-    justify-content: space-evenly; 
-    transition: opacity 0.2s;
+    position: relative; 
+    z-index: 1; 
+    padding: 0 2px; /* МАГИЯ ЗДЕСЬ: Добавили 2px отступа внутри капсулы слева и справа */
 }
 
-.nav-categories a {
+/* --- СТИЛИ ПОЛЗУНКА И ССЫЛОК --- */
+.nav-indicator {
+    position: absolute;
+    top: 2px;     
+    bottom: 2px;
+    left: 0;
+    width: 0;     
+    background-color: var(--text-color); 
+    
+    /* Концентрический радиус: Внешний(12) - Отступ(2) = 10px */
+    border-radius: 10px; 
+    
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    z-index: -1;  
+}
+
+.nav-link {
     color: var(--text-color);
     text-decoration: none;
     font-size: 14px;
-    padding: 0; /* Убираем padding, чтобы отступы считались от самих букв */
+    
+    /* Меняем flex: 1 на flex: auto. 
+       Теперь пустое пространство распределится равномерно, 
+       и расстояния между всеми категориями станут одинаковыми! */
+    flex: auto; 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    transition: color 0.3s ease; 
+}
+
+.nav-link.active {
+    color: var(--bg-color);
+    font-weight: 600;
 }
 
 /* Поле поиска внутри капсулы */
@@ -123,19 +166,26 @@ header {
 /* ГЛАВНЫЙ ЭКРАН (HERO) */
 .hero {
     display: flex;
+    flex-direction: row;    /* Выстраиваем в один ряд */
     align-items: center;
     justify-content: center;
     height: 70vh;
-    max-width: 1000px;
+    max-width: 900px;
     margin: 0 auto;
-    gap: 60px;
+    gap: 60px;              /* Расстояние между логотипом и текстом */
     padding: 0 20px;
 }
 
 .hero-logo {
-    flex: 1;
     display: flex;
     justify-content: flex-end;
+}
+
+.hero-text {
+    max-width: 500px;       /* Ограничиваем ширину текста, чтобы он собрался в центре */
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.9;
 }
 
 /* Заглушка для вашего логотипа */
@@ -165,8 +215,7 @@ header {
 .content-section {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 80px 20px; /* Отступы для комфортного скролла */
-    min-height: 100vh;
+    padding: 80px 20px;
 }
 
 .content-section h2 {
@@ -327,4 +376,78 @@ header {
         flex-direction: column;
         gap: 10px;
     }
+}
+
+/* =========================================
+   АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ (OVERRIDE)
+   ========================================= */
+@media (max-width: 768px) {
+
+    /* Хедер: отступы меньше, враппер растягивается */
+    header { padding: 14px 15px; }
+
+    .nav-wrapper { width: 100%; gap: 12px; }
+
+    /* Touch-target минимум 44px */
+    .icon-btn { width: 44px; height: 44px; flex-shrink: 0; }
+
+    /* Капсула занимает пространство между иконками */
+    .nav-pill { width: auto; flex: 1; min-width: 0; }
+
+    /* Ссылки: свайп без переноса */
+    .nav-link { flex: none; padding: 0 12px; white-space: nowrap; }
+
+    /* Hero компактнее */
+    .hero {
+        min-height: 60vh;
+        padding: 30px 20px 40px;
+        gap: 24px;
+    }
+
+    .logo-placeholder { width: 130px; height: 130px; font-size: 60px; }
+
+    .hero-text { font-size: 15px; }
+
+    /* Секции */
+    .content-section { padding: 60px 15px; }
+    .content-section h2 { font-size: 26px; }
+
+    /* Download-кнопки: touch-friendly */
+    .download-btn { padding: 14px 20px; min-height: 44px; }
+}
+
+/* =========================================
+   LANDSCAPE НА ТЕЛЕФОНЕ
+   ========================================= */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+
+    header { padding: 8px 15px; }
+
+    /* Hero горизонтально, очень компактный */
+    .hero {
+        flex-direction: row;
+        height: auto;
+        min-height: unset;
+        padding: 20px;
+        gap: 30px;
+        text-align: left;
+    }
+
+    .hero-logo { justify-content: center; flex-shrink: 0; }
+
+    .logo-placeholder {
+        width: 90px; height: 90px; font-size: 40px;
+        border-radius: 14px 30px 18px 36px;
+    }
+
+    .hero-text { font-size: 14px; }
+
+    /* Секции компактнее */
+    .content-section { padding: 40px 15px; }
+
+    /* Карточки: 2 колонки в landscape */
+    .software-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Кнопки в ряд снова допустимы */
+    .btn-row { flex-direction: row; }
 }
