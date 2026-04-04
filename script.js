@@ -41,6 +41,8 @@ themeBtn.addEventListener('click', () => {
         sunIcon.style.display = 'none';
         localStorage.setItem('theme', 'dark');
     }
+    // Пересчитываем цвет иконок после смены темы
+    updateIconContrast();
 });
 
 
@@ -52,7 +54,6 @@ const sections = document.querySelectorAll('.content-section, #main');
 
 function moveIndicator(link) {
     if (!link) {
-        // Если передали "ничего" (мы на главном экране) - прячем ползунок
         links.forEach(l => l.classList.remove('active'));
         indicator.style.width = '0px';
         return;
@@ -63,6 +64,9 @@ function moveIndicator(link) {
     
     indicator.style.width = `${link.offsetWidth}px`;
     indicator.style.transform = `translateX(${link.offsetLeft}px)`;
+
+    // Прокручиваем капсулу чтобы активный пункт был виден (для мобилы)
+    link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
 }
 
 window.addEventListener('scroll', () => {
@@ -133,14 +137,17 @@ function getBgLuminanceAt(x, y) {
 }
 
 function updateIconContrast() {
+    const isLight = document.body.classList.contains('light-theme');
     iconBtns.forEach(btn => {
         const rect = btn.getBoundingClientRect();
         const lum = getBgLuminanceAt(
             rect.left + rect.width / 2,
             rect.top + rect.height / 2
         );
-        // lum > 0.55 — светлый фон → иконке нужен тёмный цвет
-        btn.classList.toggle('on-light-bg', lum > 0.55);
+        // Тёмная тема: иконка белая → флип если фон светлый (lum > 0.6)
+        // Светлая тема: иконка тёмная → флип если фон тёмный (lum < 0.35)
+        const needsFlip = isLight ? lum < 0.35 : lum > 0.6;
+        btn.classList.toggle('on-light-bg', needsFlip);
     });
 }
 
