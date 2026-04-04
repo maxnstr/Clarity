@@ -1,6 +1,6 @@
 /* Переменные для темной и светлой темы */
 :root {
-    --bg-color: #0d131a; /* Темный фон как на скрине */
+    --bg-color: #141414; 
     --text-color: #f0f0f0;
     --pill-border: rgba(255, 255, 255, 0.5);
     --pill-bg: transparent;
@@ -63,14 +63,14 @@ header {
 /* Капсула навигации */
 .nav-pill {
     border: 1px solid var(--pill-border);
-    border-radius: 21px;
-    height: 40px;
+    border-radius: 10px; 
+    height: 30px;
     display: flex;
     align-items: center;
-    padding: 0; /* УБИРАЕМ боковые отступы, теперь всё считается автоматически */
+    padding: 0;
     position: relative;
     overflow: hidden;
-    width: 450px; /* Жестко фиксируем ширину капсулы (можете сделать больше/меньше) */
+    width: 520px;
     transition: border-color 0.3s;
 }
 
@@ -239,4 +239,92 @@ header {
 
 .download-btn:hover {
     opacity: 0.8;
+}
+
+/* --- НОВЫЕ СТИЛИ --- */
+
+/* Растягиваем карточку на все 3 колонки (на всю ширину сетки) */
+.card-wide {
+    grid-column: 1 / -1; 
+}
+
+/* Прозрачная кнопка с правильным цветом текста */
+.btn-outline {
+    background-color: transparent;
+    color: var(--text-color); /* Делаем текст светлым */
+    border: 1px solid var(--text-color);
+    margin-top: 10px;
+}
+
+/* При наведении прозрачная кнопка будет заливаться цветом */
+.btn-outline:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* Контейнер для выравнивания кнопок в ряд */
+.btn-row {
+    display: flex;       /* Выстраиваем элементы в строку */
+    gap: 15px;           /* Расстояние между двумя кнопками */
+    margin-bottom: 15px; /* Отступ снизу, чтобы третья кнопка не прилипала */
+}
+
+/* Делаем так, чтобы кнопки внутри ряда занимали ровно по 50% ширины */
+.btn-row .download-btn {
+    flex: 1;
+}
+
+/* =========================================
+   АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
+   ========================================= */
+@media (max-width: 768px) {
+    
+    /* 1. Сжимаем капсулу навигации, чтобы она не вылезала за экран */
+    .nav-pill {
+        width: 100%; /* Занимает всю ширину, которую ей дадут */
+    }
+    
+    /* Делаем категории скроллируемыми (свайп влево-вправо), если они не влезают */
+    .nav-categories {
+        justify-content: flex-start;
+        overflow-x: auto;
+        gap: 20px;
+        padding: 0 15px;
+        /* Прячем ползунок скролла для красоты */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .nav-categories::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* 2. Главный экран: текст и логотип ставим друг под другом */
+    .hero {
+        flex-direction: column;
+        height: auto;
+        padding-top: 40px;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .hero-logo {
+        justify-content: center;
+    }
+    
+    .logo-placeholder {
+        width: 160px; /* Делаем логотип поменьше */
+        height: 160px;
+        font-size: 70px;
+    }
+
+    /* 3. Карточки программ: делаем строго в одну колонку на весь экран */
+    .software-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 4. Кнопки (как в Amnezia): если они были в ряд, ставим друг под другом, чтобы текст не плющило */
+    .btn-row {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
