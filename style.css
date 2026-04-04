@@ -3,7 +3,7 @@
     --bg-color: #09090b; 
     --text-color: #f0f0f0;
     --pill-border: rgba(255, 255, 255, 0.5);
-    --pill-bg: rgba(20, 20, 20, 0.55);
+    --pill-bg: rgba(9, 9, 11, 0.55);
     --hover-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -12,7 +12,7 @@ body.light-theme {
     --bg-color: #fdfdf7;
     --text-color: #1a1a1a;
     --pill-border: rgba(0, 0, 0, 0.3);
-    --pill-bg: rgba(244, 246, 248, 0.6);
+    --pill-bg: rgba(253, 253, 247, 0.60);
     --hover-color: rgba(0, 0, 0, 0.05);
 }
 
@@ -394,8 +394,10 @@ header {
     /* Капсула занимает пространство между иконками */
     .nav-pill { width: auto; flex: 1; min-width: 0; }
 
-    /* Ссылки: свайп без переноса */
-    .nav-link { flex: none; padding: 0 12px; white-space: nowrap; }
+    /* Ссылки: свайп без переноса. Убираем padding с nav-categories
+       чтобы offsetLeft считался корректно и индикатор шёл edge-to-edge */
+    .nav-categories { padding: 0 2px; }
+    .nav-link { flex: none; padding: 0 14px; white-space: nowrap; }
 
     /* Hero компактнее */
     .hero {
@@ -412,8 +414,8 @@ header {
     .content-section { padding: 60px 15px; }
     .content-section h2 { font-size: 26px; }
 
-    /* Download-кнопки: touch-friendly */
-    .download-btn { padding: 14px 20px; min-height: 44px; }
+    /* Download-кнопки: компактнее, не раздутые */
+    .download-btn { padding: 11px 16px; min-height: 40px; font-size: 14px; }
 }
 
 /* =========================================
