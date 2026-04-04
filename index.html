@@ -19,12 +19,15 @@
             <!-- Центральная "капсула" -->
             <div class="nav-pill" id="nav-pill">
                 <!-- Состояние 1: Категории -->
-               <div class="nav-categories" id="nav-categories">
-                    <a href="#os">OS</a>
-                    <a href="#proxy">Proxy & VPN</a>
-                    <a href="#ai">AI</a>
-                    <a href="#video">Video</a>
-                    <a href="#audio">Audio</a>
+                <div class="nav-categories" id="nav-categories">
+                    <!-- Ползунок-подсветка -->
+                    <div class="nav-indicator" id="nav-indicator"></div>
+                    
+                    <a href="#os" class="nav-link">Soft</a>
+                    <a href="#proxy" class="nav-link">Proxy & VPN</a>
+                    <a href="#ai" class="nav-link">AI</a>
+                    <a href="#video" class="nav-link">Web tools</a>
+                    <a href="#audio" class="nav-link">Games</a>
                 </div>
                 
                 <!-- Состояние 2: Поиск (изначально скрыто) -->
@@ -45,7 +48,7 @@
     </header>
 
     <!-- Главный экран -->
-    <main class="hero">
+    <main class="hero" id="main">
         <!-- Блок для логотипа -->
         <div class="hero-logo">
             <!-- Сюда потом вставите свою картинку: <img src="logo.png" alt="Кларити"> -->
@@ -58,10 +61,9 @@
         </div>
     </main>
 
-    <!-- Скрытые секции контента (появятся при скролле) -->
-    <!-- Секция OS Soft -->
+    <!-- Секция Soft -->
     <section id="os" class="content-section">
-        <h2>OS Soft</h2>
+        <h2>💾 Soft</h2>
         <p class="section-description">Базовые программы, необходимые для комфортной работы за ПК.</p>
         
         <div class="software-grid">
@@ -120,7 +122,7 @@
             </div>
         </div>
 
-        <h2 class="sub-heading">ПО для кодинга</h2>
+        <h2 class="sub-heading">🖥️ ПО для кодинга</h2>
         
         <div class="software-grid">
             <div class="software-card">
@@ -163,7 +165,7 @@
     
     <!-- Секция Proxy & VPN -->
     <section id="proxy" class="content-section">
-        <h2>Proxy & VPN</h2>
+        <h2>🛡️ Proxy & VPN</h2>
         <p class="section-description">Инструменты для обхода блокировок и безопасного серфинга в сети.</p>
         
         <div class="software-grid">
@@ -171,15 +173,12 @@
                 <h3>Amnezia VPN</h3>
                 <p>Бесплатный клиент для создания собственного VPN на личном сервере.</p>
                 
-                <!-- Обертка для двух кнопок в ряд -->
                 <div class="btn-row">
                     <a href="https://amnezia.org/ru" target="_blank" class="download-btn">Официальный сайт</a>
                     <a href="https://github.com/amnezia-vpn/amneziawg-windows-client/releases" target="_blank" class="download-btn">AmneziaWG (GitHub)</a>
                 </div>
                 
-                <!-- Третья кнопка идет следом -->
-                <!-- Третья кнопка (добавили класс btn-outline) -->
-<a href="https://github.com/ImMALWARE/bash-warp-generator/blob/main/README.md" target="_blank" class="download-btn btn-outline">Генератор конфига Cloudflare WARP для AmneziaVPN.</a>
+                <a href="https://github.com/ImMALWARE/bash-warp-generator/blob/main/README.md" target="_blank" class="download-btn btn-outline">Генератор конфига Cloudflare WARP для AmneziaVPN.</a>
             </div>
 
             <div class="software-card">
@@ -204,7 +203,7 @@
 
     <!-- Секция AI (Нейросети) -->
     <section id="ai" class="content-section">
-        <h2>AI (Нейросети)</h2>
+        <h2>🤖 AI (Нейросети)</h2>
         <p class="section-description">Языковые модели и инструменты на базе ИИ для работы, учебы и творчества.</p>
         
         <div class="software-grid">
@@ -242,6 +241,58 @@
                 <h3>Suno AI</h3>
                 <p>Потрясающая нейросеть, способная генерировать полноценные песни по вашему описанию.</p>
                 <a href="https://suno.com/" target="_blank" class="download-btn">Открыть</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция Web tools -->
+    <section id="video" class="content-section">
+        <h2>🌐 Web tools</h2>
+        <p class="section-description">Онлайн-инструменты для работы с файлами, кодом и медиаконтентом — без установки программ.</p>
+        
+        <div class="software-grid">
+            <div class="software-card">
+                <h3>iLovePDF</h3>
+                <p>Конвертация, объединение, сжатие и редактирование PDF и DOCX прямо в браузере.</p>
+                <a href="https://www.ilovepdf.com/ru/word_to_pdf" target="_blank" class="download-btn">Открыть</a>
+            </div>
+
+            <div class="software-card">
+                <h3>HTML Validator</h3>
+                <p>Онлайн-инструмент для проверки корректности и валидности HTML-кода.</p>
+                <a href="https://www.freeformatter.com/html-validator.html" target="_blank" class="download-btn">Открыть</a>
+            </div>
+
+            <div class="software-card">
+                <h3>Cobalt</h3>
+                <p>Скачивает видео и аудио с YouTube, VK, TikTok, Twitter и десятков других платформ — быстро и без рекламы.</p>
+                <a href="https://cobalt.tools/" target="_blank" class="download-btn">Открыть</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция Games -->
+    <section id="audio" class="content-section">
+        <h2>🎮 Games</h2>
+        <p class="section-description">Утилиты для улучшения игрового опыта: поддержка геймпадов и апгрейд графических технологий.</p>
+        
+        <div class="software-grid">
+            <div class="software-card">
+                <h3>DS4Windows</h3>
+                <p>Эмулятор геймпадов — позволяет использовать контроллер PlayStation на ПК как Xbox-совместимый.</p>
+                <a href="https://ds4-windows.com/" target="_blank" class="download-btn">Скачать</a>
+            </div>
+
+            <div class="software-card">
+                <h3>DLSS Swapper</h3>
+                <p>Замена библиотеки DLSS на самую актуальную версию в одиночных играх для улучшения качества картинки.</p>
+                <a href="https://github.com/beeradmoore/dlss-swapper" target="_blank" class="download-btn">Скачать с GitHub</a>
+            </div>
+
+            <div class="software-card">
+                <h3>DLSSTweaks</h3>
+                <p>Тонкая настройка DLSS: принудительное включение DLAA, изменение режимов и параметров масштабирования.</p>
+                <a href="https://github.com/emoose/DLSSTweaks/releases" target="_blank" class="download-btn">Скачать с GitHub</a>
             </div>
         </div>
     </section>
