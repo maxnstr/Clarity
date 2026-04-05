@@ -66,6 +66,128 @@ header {
 
 .icon-btn svg { width: 20px; height: 20px; }
 
+/* Кнопка "k." — домой */
+.home-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: inherit;
+    letter-spacing: -0.5px;
+    padding: 0;
+    line-height: 1;
+    text-decoration: none;
+    transition: opacity 0.2s, color 0.15s;
+    flex-shrink: 0;
+}
+.home-btn:hover { opacity: 0.6; }
+.home-btn.on-light-bg { color: var(--bg-color); }
+
+/* Кнопка фильтров */
+.filter-btn {
+    position: relative;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.2s, color 0.15s;
+    flex-shrink: 0;
+}
+.filter-btn:hover { transform: scale(1.1); }
+.filter-btn svg { width: 18px; height: 18px; }
+.filter-btn.on-light-bg { color: var(--bg-color); }
+.filter-btn.has-active-filters::after {
+    content: '';
+    position: absolute;
+    top: 4px; right: 4px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--text-color);
+}
+
+/* Панель фильтров внутри капсулы (состояние 3) */
+.nav-filter-wrapper {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px 0 16px;
+    background-color: var(--pill-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 2;
+}
+
+.filter-label {
+    font-size: 12px;
+    opacity: 0.45;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.filter-tags {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.filter-tags::-webkit-scrollbar { display: none; }
+
+.filter-tag {
+    display: flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(128,128,128,0.3);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    background: transparent;
+    color: var(--text-color);
+    font-family: inherit;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    user-select: none;
+}
+.filter-tag:hover { border-color: rgba(128,128,128,0.6); }
+.filter-tag.active {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
+}
+
+.close-filter-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.6;
+    flex-shrink: 0;
+    padding: 0;
+    line-height: 1;
+}
+.close-filter-btn:hover { opacity: 1; }
+
+/* Карточки скрытые фильтром */
+.software-card.hidden-by-filter {
+    display: none;
+}
+.software-card.hidden-by-search {
+    display: none;
+}
+
 
 /* --- 2. ИДЕАЛЬНЫЕ ПРОПОРЦИИ КАПСУЛЫ --- */
 .nav-pill {
@@ -243,51 +365,124 @@ header {
     gap: 20px;
 }
 
-/* Сама карточка */
+/* Сама карточка — без рамки для всех */
 .software-card {
-    background-color: rgba(128, 128, 128, 0.05);
-    border: 1px solid var(--pill-border);
+    background-color: rgba(128, 128, 128, 0.07);
+    border: none;
     border-radius: 16px;
     padding: 25px;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, background-color 0.2s;
+    position: relative;
+    overflow: hidden;
 }
 
 .software-card:hover {
-    transform: translateY(-4px); /* Легкое поднятие карточки при наведении */
+    transform: translateY(-4px);
+    background-color: rgba(128, 128, 128, 0.12);
+}
+
+/* Широкая карточка (Amnezia VPN) — оставляем рамку и оригинальные кнопки */
+.software-card.card-wide {
+    border: 1px solid var(--pill-border);
+    background-color: rgba(128, 128, 128, 0.05);
+}
+
+.software-card.card-wide:hover {
     background-color: var(--hover-color);
+}
+
+/* Логотип-ватермарк на фоне карточки */
+.card-logo {
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    opacity: 0.06;
+    pointer-events: none;
+    user-select: none;
+    filter: invert(0);
+    transition: opacity 0.3s;
+}
+
+body:not(.light-theme) .card-logo {
+    filter: invert(1);
+    opacity: 0.07;
+}
+
+.software-card:hover .card-logo {
+    opacity: 0.13;
 }
 
 .software-card h3 {
     margin: 0 0 10px 0;
     font-size: 22px;
+    position: relative;
+    z-index: 1;
 }
 
 .software-card p {
-    margin: 0 0 25px 0;
+    margin: 0 0 20px 0;
     font-size: 14px;
     opacity: 0.8;
     line-height: 1.5;
-    flex-grow: 1; /* Прижимает кнопку к низу карточки, если тексты разной длины */
+    flex-grow: 1;
+    position: relative;
+    z-index: 1;
 }
 
-/* Кнопка "Скачать" */
+/* Ghost-кнопка для всех карточек по умолчанию */
 .download-btn {
     display: block;
-    background-color: var(--text-color); /* Инвертируем цвета: фон кнопки = цвет текста сайта */
-    color: var(--bg-color); /* Текст кнопки = цвет фона сайта */
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid rgba(128, 128, 128, 0.35);
     text-decoration: none;
     padding: 12px 20px;
     border-radius: 10px;
     text-align: center;
     font-weight: 600;
     font-size: 14px;
-    transition: opacity 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
+    position: relative;
+    z-index: 1;
 }
 
 .download-btn:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
+    opacity: 1;
+}
+
+/* Кнопки внутри card-wide — сплошные (первые две кнопки Amnezia) */
+.card-wide .download-btn {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
+}
+
+.card-wide .download-btn:hover {
     opacity: 0.8;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* Третья кнопка (btn-outline) внутри card-wide — ghost, перебиваем специфичностью */
+.card-wide .download-btn.btn-outline {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid rgba(128, 128, 128, 0.35);
+}
+
+.card-wide .download-btn.btn-outline:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    opacity: 1;
+    border-color: var(--text-color);
 }
 
 /* --- НОВЫЕ СТИЛИ --- */
@@ -321,6 +516,62 @@ header {
 /* Делаем так, чтобы кнопки внутри ряда занимали ровно по 50% ширины */
 .btn-row .download-btn {
     flex: 1;
+}
+
+/* =====================
+   ТЕГИ НА КАРТОЧКАХ
+   ===================== */
+
+/* Строка с заголовком и бейджами */
+.card-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.card-header h3 {
+    margin: 0;
+}
+
+/* Бейдж тега */
+.tag-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 9px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+}
+
+.tag-badge.open-source {
+    background-color: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+body.light-theme .tag-badge.open-source {
+    background-color: rgba(22, 163, 74, 0.1);
+    color: #16a34a;
+    border-color: rgba(22, 163, 74, 0.3);
+}
+
+.tag-badge.qload {
+    background-color: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+body.light-theme .tag-badge.qload {
+    background-color: rgba(79, 70, 229, 0.1);
+    color: #4f46e5;
+    border-color: rgba(79, 70, 229, 0.3);
 }
 
 /* =========================================
