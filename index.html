@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кларити</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,6 +12,9 @@
     <!-- Навигация -->
     <header>
         <div class="nav-wrapper">
+            <!-- Кнопка "k." — домой -->
+            <a href="#main" class="home-btn" id="home-btn" aria-label="На главную">k.</a>
+
             <!-- Кнопка поиска -->
             <button class="icon-btn" id="search-btn" aria-label="Поиск">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -20,28 +24,39 @@
             <div class="nav-pill" id="nav-pill">
                 <!-- Состояние 1: Категории -->
                 <div class="nav-categories" id="nav-categories">
-                    <!-- Ползунок-подсветка -->
                     <div class="nav-indicator" id="nav-indicator"></div>
-                    
                     <a href="#os" class="nav-link">Soft</a>
                     <a href="#proxy" class="nav-link">Proxy & VPN</a>
                     <a href="#ai" class="nav-link">AI</a>
                     <a href="#video" class="nav-link">Web tools</a>
                     <a href="#audio" class="nav-link">Games</a>
                 </div>
-                
-                <!-- Состояние 2: Поиск (изначально скрыто) -->
+
+                <!-- Состояние 2: Поиск -->
                 <div class="nav-search-input-wrapper" id="nav-search-wrapper">
-                    <input type="text" id="search-input" placeholder="Поиск по тегам или названиям...">
+                    <input type="text" id="search-input" placeholder="Поиск по названиям...">
                     <button class="close-search-btn" id="close-search-btn">✕</button>
+                </div>
+
+                <!-- Состояние 3: Фильтры по тегам -->
+                <div class="nav-filter-wrapper" id="nav-filter-wrapper">
+                    <span class="filter-label">Теги:</span>
+                    <div class="filter-tags">
+                        <button class="filter-tag" data-tag="open-source">Open Source</button>
+                        <button class="filter-tag" data-tag="qload">Qload</button>
+                    </div>
+                    <button class="close-filter-btn" id="close-filter-btn">✕</button>
                 </div>
             </div>
 
+            <!-- Кнопка фильтров -->
+            <button class="filter-btn" id="filter-btn" aria-label="Фильтры">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+            </button>
+
             <!-- Кнопка смены темы -->
             <button class="icon-btn" id="theme-btn" aria-label="Смена темы">
-                <!-- Иконка луны -->
                 <svg id="moon-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                <!-- Иконка солнца (скрыта в темной теме) -->
                 <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
             </button>
         </div>
@@ -67,55 +82,64 @@
         <p class="section-description">Базовые программы, необходимые для комфортной работы за ПК.</p>
         
         <div class="software-grid">
-            <div class="software-card">
+            <div class="software-card has-logo">
+                <img class="card-logo" src="logos/utorrent.svg" alt="">
                 <h3>µTorrent</h3>
                 <p>Компактный и быстрый клиент для скачивания торрент-файлов.</p>
                 <a href="https://www.utorrent.com/intl/ru/" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
+            <div class="software-card has-logo">
+                <img class="card-logo" src="logos/discord.svg" alt="">
                 <h3>Discord</h3>
                 <p>Популярный мессенджер для геймеров и рабочих сообществ.</p>
                 <a href="https://discord.com/download" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
+            <div class="software-card has-logo">
+                <img class="card-logo" src="logos/spotify.svg" alt="">
                 <h3>Spotify</h3>
                 <p>Стриминговый сервис для прослушивания музыки и подкастов.</p>
                 <a href="https://www.spotify.com/by-ru/download/windows/" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
+            <div class="software-card has-logo">
+                <img class="card-logo" src="logos/obsidian.svg" alt="">
                 <h3>Obsidian</h3>
                 <p>Мощная база знаний, работающая поверх локальной папки с файлами.</p>
                 <a href="https://obsidian.md/download" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
+            <div class="software-card has-logo">
+                <img class="card-logo" src="logos/nvidia.svg" alt="">
                 <h3>NVIDIA APP</h3>
                 <p>Универсальное приложение для настройки видеокарт NVIDIA и драйверов.</p>
                 <a href="https://www.nvidia.com/en-eu/software/nvidia-app/" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
+            <div class="software-card has-logo">
+                <img class="card-logo" src="logos/winrar.svg" alt="">
                 <h3>WinRAR</h3>
                 <p>Мощный архиватор для создания и управления архивами.</p>
                 <a href="https://www.win-rar.com/start.html?&L=4" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
+            <div class="software-card has-logo">
+                <img class="card-logo" src="logos/steam.svg" alt="">
                 <h3>Steam</h3>
                 <p>Крупнейшая платформа цифровой дистрибуции компьютерных игр.</p>
                 <a href="https://store.steampowered.com/about/" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
-                <h3>OBS Studio</h3>
+            <div class="software-card has-logo" data-tags="open-source">
+                <img class="card-logo" src="logos/obs.svg" alt="">
+                <div class="card-header"><h3>OBS Studio</h3><span class="tag-badge open-source">open source</span></div>
                 <p>Программа для записи видео с экрана и потокового вещания.</p>
                 <a href="https://obsproject.com/ru/download" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
+            <div class="software-card has-logo">
+                <img class="card-logo" src="logos/vac.svg" alt="">
                 <h3>Virtual Audio Cable</h3>
                 <p>Утилита для передачи аудиопотоков между приложениями.</p>
                 <a href="https://vac.muzychenko.net/en/download.htm" target="_blank" class="download-btn">Скачать</a>
@@ -125,37 +149,43 @@
         <h2 class="sub-heading">🖥️ ПО для кодинга</h2>
         
         <div class="software-grid">
-            <div class="software-card">
-                <h3>VS Code</h3>
+            <div class="software-card has-logo" data-tags="open-source">
+                <img class="card-logo" src="logos/vscode.svg" alt="">
+                <div class="card-header"><h3>VS Code</h3><span class="tag-badge open-source">open source</span></div>
                 <p>Легкий, но невероятно мощный редактор кода от Microsoft.</p>
                 <a href="https://code.visualstudio.com/" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
+            <div class="software-card has-logo">
+                <img class="card-logo" src="logos/python.svg" alt="">
                 <h3>Python</h3>
                 <p>Интерпретатор одного из самых популярных языков программирования.</p>
                 <a href="https://www.python.org/" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
+            <div class="software-card has-logo">
+                <img class="card-logo" src="logos/pycharm.svg" alt="">
                 <h3>PyCharm</h3>
                 <p>Интегрированная среда разработки (IDE) для Python от JetBrains.</p>
                 <a href="https://www.jetbrains.com/pycharm/" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
+            <div class="software-card has-logo">
+                <img class="card-logo" src="logos/android-studio.svg" alt="">
                 <h3>Android Studio</h3>
                 <p>Официальная среда разработки для создания приложений под Android.</p>
                 <a href="https://developer.android.com/studio?hl=ru" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
-                <h3>Git</h3>
+            <div class="software-card has-logo" data-tags="open-source">
+                <img class="card-logo" src="logos/git.svg" alt="">
+                <div class="card-header"><h3>Git</h3><span class="tag-badge open-source">open source</span></div>
                 <p>Распределенная система управления версиями файлов.</p>
                 <a href="https://git-scm.com/install/windows" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
+            <div class="software-card has-logo">
+                <img class="card-logo" src="logos/nodejs.svg" alt="">
                 <h3>NodeJS</h3>
                 <p>Программная платформа, основанная на движке V8, для выполнения JavaScript.</p>
                 <a href="https://nodejs.org/en/download" target="_blank" class="download-btn">Скачать</a>
@@ -169,8 +199,8 @@
         <p class="section-description">Инструменты для обхода блокировок и безопасного серфинга в сети.</p>
         
         <div class="software-grid">
-           <div class="software-card card-wide">
-                <h3>Amnezia VPN</h3>
+           <div class="software-card card-wide" data-tags="open-source">
+                <div class="card-header"><h3>Amnezia VPN</h3><span class="tag-badge open-source">open source</span></div>
                 <p>Бесплатный клиент для создания собственного VPN на личном сервере.</p>
                 
                 <div class="btn-row">
@@ -193,8 +223,8 @@
                 <a href="https://chromewebstore.google.com/detail/бесплатный-vpn-proxy-vpnl/lneaocagcijjdpkcabeanfpdbmapcjjg?hl=ru" target="_blank" class="download-btn">Установить расширение</a>
             </div>
 
-            <div class="software-card">
-                <h3>Zapret</h3>
+            <div class="software-card" data-tags="open-source">
+                <div class="card-header"><h3>Zapret</h3><span class="tag-badge open-source">open source</span></div>
                 <p>Мощный инструмент для обхода DPI-блокировок (помогает с YouTube, Discord и др.).</p>
                 <a href="https://github.com/Flowseal/zapret-discord-youtube" target="_blank" class="download-btn">Скачать с GitHub</a>
             </div>
@@ -263,8 +293,8 @@
                 <a href="https://www.freeformatter.com/html-validator.html" target="_blank" class="download-btn">Открыть</a>
             </div>
 
-            <div class="software-card">
-                <h3>Cobalt</h3>
+            <div class="software-card" data-tags="open-source">
+                <div class="card-header"><h3>Cobalt</h3><span class="tag-badge open-source">open source</span></div>
                 <p>Скачивает видео и аудио с YouTube, VK, TikTok, Twitter и десятков других платформ — быстро и без рекламы.</p>
                 <a href="https://cobalt.tools/" target="_blank" class="download-btn">Открыть</a>
             </div>
@@ -283,14 +313,14 @@
                 <a href="https://ds4-windows.com/" target="_blank" class="download-btn">Скачать</a>
             </div>
 
-            <div class="software-card">
-                <h3>DLSS Swapper</h3>
+            <div class="software-card" data-tags="open-source">
+                <div class="card-header"><h3>DLSS Swapper</h3><span class="tag-badge open-source">open source</span></div>
                 <p>Замена библиотеки DLSS на самую актуальную версию в одиночных играх для улучшения качества картинки.</p>
                 <a href="https://github.com/beeradmoore/dlss-swapper" target="_blank" class="download-btn">Скачать с GitHub</a>
             </div>
 
-            <div class="software-card">
-                <h3>DLSSTweaks</h3>
+            <div class="software-card" data-tags="open-source">
+                <div class="card-header"><h3>DLSSTweaks</h3><span class="tag-badge open-source">open source</span></div>
                 <p>Тонкая настройка DLSS: принудительное включение DLAA, изменение режимов и параметров масштабирования.</p>
                 <a href="https://github.com/emoose/DLSSTweaks/releases" target="_blank" class="download-btn">Скачать с GitHub</a>
             </div>
