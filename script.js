@@ -4,13 +4,28 @@
 const navCategories   = document.getElementById('nav-categories');
 const searchWrapper   = document.getElementById('nav-search-wrapper');
 const filterWrapper   = document.getElementById('nav-filter-wrapper');
+const mobileLabel     = document.getElementById('nav-mobile-label');
 
 function setCapsuleState(state) {
-    navCategories.style.display = state === 'nav'    ? 'flex' : 'none';
+    // nav-categories скрыт на мобиле через CSS; на десктопе управляется здесь
+    const isMobile = window.innerWidth <= 768;
+    navCategories.style.display = (!isMobile && state === 'nav') ? 'flex' : (isMobile ? 'none' : 'none');
     searchWrapper.style.display = state === 'search' ? 'flex' : 'none';
     filterWrapper.style.display = state === 'filter' ? 'flex' : 'none';
+    if (mobileLabel) mobileLabel.style.display = (isMobile && state === 'nav') ? 'flex' : 'none';
 }
-setCapsuleState('nav');
+
+// Инициализация при загрузке
+function initCapsule() {
+    const isMobile = window.innerWidth <= 768;
+    navCategories.style.display = isMobile ? 'none' : 'flex';
+    if (mobileLabel) mobileLabel.style.display = isMobile ? 'flex' : 'none';
+    searchWrapper.style.display = 'none';
+    filterWrapper.style.display = 'none';
+}
+
+window.addEventListener('resize', initCapsule);
+initCapsule();
 
 
 // =============================================
@@ -27,7 +42,7 @@ searchBtn.addEventListener('click', () => {
 });
 
 closeSearchBtn.addEventListener('click', () => {
-    setCapsuleState('nav');
+    initCapsule();
     searchInput.value = '';
     applySearch('');
 });
@@ -54,7 +69,7 @@ const filterTags     = document.querySelectorAll('.filter-tag');
 let activeTags = new Set();
 
 filterBtn.addEventListener('click', () => setCapsuleState('filter'));
-closeFilterBtn.addEventListener('click', () => setCapsuleState('nav'));
+closeFilterBtn.addEventListener('click', () => initCapsule());
 
 filterTags.forEach(tag => {
     tag.addEventListener('click', () => {
@@ -96,49 +111,93 @@ themeBtn.addEventListener('click', () => {
     moonIcon.style.display = isLight ? 'none'  : 'block';
     sunIcon.style.display  = isLight ? 'block' : 'none';
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    // rAF гарантирует что браузер применил новый класс перед замером яркости
-    requestAnimationFrame(updateIconContrast);
+    requestAnimationFrame(() => requestAnimationFrame(updateIconContrast));
 });
 
 
 // =============================================
-// ПОЛЗУНОК И АКТИВНЫЙ РАЗДЕЛ
+// ПОЛЗУНОК, АКТИВНЫЙ РАЗДЕЛ, МОБИЛЬНЫЙ ЛЕЙБЛ
 // =============================================
-const indicator = document.getElementById('nav-indicator');
-const links     = document.querySelectorAll('.nav-link');
-const sections  = document.querySelectorAll('.content-section, #main');
+const indicator   = document.getElementById('nav-indicator');
+const links       = document.querySelectorAll('.nav-link');
+const sections    = document.querySelectorAll('.content-section, #main');
+const bottomBtns  = document.querySelectorAll('.bottom-nav-btn');
+
+// Маппинг id раздела → название для мобильного лейбла
+const sectionNames = {
+    'main':  'Кларити',
+    'os':    'Soft',
+    'proxy': 'Proxy & VPN',
+    'ai':    'AI',
+    'video': 'Web tools',
+    'audio': 'Games'
+};
+
+function setMobileLabel(sectionId) {
+    if (!mobileLabel) return;
+    const name = sectionNames[sectionId] || 'Кларити';
+    if (mobileLabel.textContent === name) return;
+    mobileLabel.style.opacity = '0';
+    setTimeout(() => {
+        mobileLabel.textContent = name;
+        mobileLabel.style.opacity = '1';
+    }, 150);
+}
+
+function setBottomNavActive(sectionId) {
+    bottomBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.section === sectionId);
+    });
+}
 
 function moveIndicator(link) {
     if (!link) {
         links.forEach(l => l.classList.remove('active'));
-        indicator.style.width = '0px';
+        if (indicator) indicator.style.width = '0px';
         return;
     }
     links.forEach(l => l.classList.remove('active'));
     link.classList.add('active');
-    indicator.style.width     = link.offsetWidth + 'px';
-    indicator.style.transform = 'translateX(' + link.offsetLeft + 'px)';
+    if (indicator) {
+        indicator.style.width     = link.offsetWidth + 'px';
+        indicator.style.transform = 'translateX(' + link.offsetLeft + 'px)';
+    }
     link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
 }
+
+let lastSection = '';
 
 window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(section => {
-        if (pageYOffset >= section.offsetTop - 150) current = section.getAttribute('id');
+        if (pageYOffset >= section.offsetTop - 200) current = section.getAttribute('id');
     });
-    if (current === 'main' || !current) {
-        moveIndicator(null);
-    } else {
-        const activeLink = document.querySelector('.nav-link[href="#' + current + '"]');
-        if (activeLink && !activeLink.classList.contains('active')) moveIndicator(activeLink);
+    if (!current) current = 'main';
+
+    if (current !== lastSection) {
+        lastSection = current;
+        setMobileLabel(current);
+        setBottomNavActive(current);
+
+        if (current === 'main') {
+            moveIndicator(null);
+        } else {
+            const activeLink = document.querySelector('.nav-link[href="#' + current + '"]');
+            if (activeLink && !activeLink.classList.contains('active')) moveIndicator(activeLink);
+        }
     }
 });
 
 links.forEach(link => link.addEventListener('click', function() { moveIndicator(this); }));
-window.addEventListener('load',   () => window.dispatchEvent(new Event('scroll')));
+
+window.addEventListener('load', () => {
+    window.dispatchEvent(new Event('scroll'));
+});
+
 window.addEventListener('resize', () => {
     const a = document.querySelector('.nav-link.active');
     if (a) moveIndicator(a);
+    initCapsule();
 });
 
 
@@ -168,18 +227,28 @@ function getBgLuminanceAt(x, y) {
 
 function updateIconContrast() {
     const isLight = document.body.classList.contains('light-theme');
+
+    // Все icon-btn и filter-btn
     allIconBtns.forEach(btn => {
         const rect = btn.getBoundingClientRect();
-        const lum  = getBgLuminanceAt(rect.left + rect.width / 2, rect.top + rect.height / 2);
-        btn.classList.toggle('on-light-bg', isLight ? lum < 0.35 : lum > 0.6);
+        const cx = rect.left + rect.width  / 2;
+        const cy = rect.top  + rect.height / 2;
+        // Пропускаем элементы вне viewport
+        if (cy < 0 || cy > window.innerHeight) return;
+        const lum = getBgLuminanceAt(cx, cy);
+        const flip = isLight ? lum < 0.35 : lum > 0.6;
+        btn.classList.toggle('on-light-bg', flip);
     });
+
+    // home-btn
     if (homeBtnEl) {
         const rect = homeBtnEl.getBoundingClientRect();
-        const lum  = getBgLuminanceAt(rect.left + rect.width / 2, rect.top + rect.height / 2);
-        homeBtnEl.classList.toggle('on-light-bg', isLight ? lum < 0.35 : lum > 0.6);
+        const lum = getBgLuminanceAt(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        const flip = isLight ? lum < 0.35 : lum > 0.6;
+        homeBtnEl.classList.toggle('on-light-bg', flip);
     }
 }
 
 window.addEventListener('scroll', updateIconContrast, { passive: true });
 window.addEventListener('resize', updateIconContrast);
-updateIconContrast();
+window.addEventListener('load',   updateIconContrast);

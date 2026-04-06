@@ -540,7 +540,7 @@ body:not(.light-theme) .card-logo {
     display: inline-flex;
     align-items: center;
     padding: 2px 9px;
-    border-radius: 5px;
+    border-radius: 20px;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.02em;
@@ -575,97 +575,93 @@ body.light-theme .tag-badge.qload {
 }
 
 /* =========================================
-   АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ
+   МОБИЛЬНЫЕ УСТРОЙСТВА
    ========================================= */
 @media (max-width: 768px) {
-    
-    /* 1. Сжимаем капсулу навигации, чтобы она не вылезала за экран */
-    .nav-pill {
-        width: 100%; /* Занимает всю ширину, которую ей дадут */
-    }
-    
-    /* Делаем категории скроллируемыми (свайп влево-вправо), если они не влезают */
-    .nav-categories {
-        justify-content: flex-start;
-        overflow-x: auto;
-        gap: 20px;
-        padding: 0 15px;
-        /* Прячем ползунок скролла для красоты */
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-    .nav-categories::-webkit-scrollbar {
-        display: none;
+
+    /* Хедер */
+    header {
+        padding: 14px 15px;
     }
 
-    /* 2. Главный экран: текст и логотип ставим друг под другом */
-    .hero {
-        flex-direction: column;
-        height: auto;
-        padding-top: 40px;
-        text-align: center;
-        gap: 30px;
-    }
-    
-    .hero-logo {
-        justify-content: center;
-    }
-    
-    .logo-placeholder {
-        width: 160px; /* Делаем логотип поменьше */
-        height: 160px;
-        font-size: 70px;
-    }
-
-    /* 3. Карточки программ: делаем строго в одну колонку на весь экран */
-    .software-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* 4. Кнопки (как в Amnezia): если они были в ряд, ставим друг под другом, чтобы текст не плющило */
-    .btn-row {
-        flex-direction: column;
+    .nav-wrapper {
+        width: 100%;
         gap: 10px;
     }
-}
 
-/* =========================================
-   АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ (OVERRIDE)
-   ========================================= */
-@media (max-width: 768px) {
+    /* Touch-targets */
+    .icon-btn  { width: 44px; height: 44px; flex-shrink: 0; }
+    .filter-btn { width: 44px; height: 44px; flex-shrink: 0; }
 
-    /* Хедер: отступы меньше, враппер растягивается */
-    header { padding: 14px 15px; }
+    /* Капсула — занимает место между иконками, показывает только текущий раздел */
+    .nav-pill {
+        width: auto;
+        flex: 1;
+        min-width: 0;
+        justify-content: center;
+    }
 
-    .nav-wrapper { width: 100%; gap: 12px; }
+    /* На мобиле скрываем список категорий — заменяем fade-label */
+    .nav-categories {
+        display: none !important;
+    }
 
-    /* Touch-target минимум 44px */
-    .icon-btn { width: 44px; height: 44px; flex-shrink: 0; }
+    /* Показываем мобильный лейбл внутри капсулы */
+    .nav-mobile-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        font-size: 14px;
+        font-weight: 500;
+        transition: opacity 0.25s ease;
+    }
 
-    /* Капсула занимает пространство между иконками */
-    .nav-pill { width: auto; flex: 1; min-width: 0; }
+    /* Состояния поиска и фильтра как обычно */
+    .nav-search-input-wrapper,
+    .nav-filter-wrapper {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+    }
 
-    /* Ссылки: свайп без переноса. Убираем padding с nav-categories
-       чтобы offsetLeft считался корректно и индикатор шёл edge-to-edge */
-    .nav-categories { padding: 0 2px; }
-    .nav-link { flex: none; padding: 0 14px; white-space: nowrap; }
+    /* Нижняя навигация — скрыта по умолчанию, видна только на мобиле */
+    .bottom-nav {
+        display: flex;
+    }
+
+    /* Основной контент — добавляем отступ снизу чтобы не перекрывала нижняя панель */
+    main, .content-section {
+        padding-bottom-extra: 90px;
+    }
+
+    body {
+        padding-bottom: 90px;
+    }
 
     /* Hero компактнее */
     .hero {
+        flex-direction: column;
+        height: auto;
         min-height: 60vh;
         padding: 30px 20px 40px;
+        text-align: center;
         gap: 24px;
     }
 
+    .hero-logo { justify-content: center; }
     .logo-placeholder { width: 130px; height: 130px; font-size: 60px; }
-
     .hero-text { font-size: 15px; }
 
     /* Секции */
-    .content-section { padding: 60px 15px; }
+    .content-section { padding: 50px 15px 30px; }
     .content-section h2 { font-size: 26px; }
 
-    /* Download-кнопки: компактнее, не раздутые */
+    /* Карточки в одну колонку */
+    .software-grid { grid-template-columns: 1fr; }
+
+    /* Кнопки вертикально */
+    .btn-row { flex-direction: column; gap: 10px; }
     .download-btn { padding: 11px 16px; min-height: 40px; font-size: 14px; }
 }
 
@@ -676,7 +672,14 @@ body.light-theme .tag-badge.qload {
 
     header { padding: 8px 15px; }
 
-    /* Hero горизонтально, очень компактный */
+    .bottom-nav { display: none; }
+    body { padding-bottom: 0; }
+
+    /* Nav capsule shows categories again in landscape */
+    .nav-categories { display: flex !important; padding: 0 2px; overflow-x: auto; }
+    .nav-mobile-label { display: none; }
+    .nav-link { flex: none; padding: 0 12px; white-space: nowrap; }
+
     .hero {
         flex-direction: row;
         height: auto;
@@ -687,20 +690,85 @@ body.light-theme .tag-badge.qload {
     }
 
     .hero-logo { justify-content: center; flex-shrink: 0; }
-
-    .logo-placeholder {
-        width: 90px; height: 90px; font-size: 40px;
-        border-radius: 14px 30px 18px 36px;
-    }
-
+    .logo-placeholder { width: 90px; height: 90px; font-size: 40px; border-radius: 14px 30px 18px 36px; }
     .hero-text { font-size: 14px; }
 
-    /* Секции компактнее */
     .content-section { padding: 40px 15px; }
-
-    /* Карточки: 2 колонки в landscape */
     .software-grid { grid-template-columns: repeat(2, 1fr); }
-
-    /* Кнопки в ряд снова допустимы */
     .btn-row { flex-direction: row; }
+}
+
+/* =========================================
+   НИЖНЯЯ НАВИГАЦИЯ (только мобиль)
+   ========================================= */
+.bottom-nav {
+    display: none; /* скрыта на десктопе */
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+
+    /* Стекломорфизм */
+    background-color: var(--pill-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--pill-border);
+    border-radius: 20px;
+
+    padding: 10px 18px;
+    gap: 6px;
+    align-items: center;
+}
+
+.bottom-nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    width: 44px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3px;
+    opacity: 0.45;
+    transition: opacity 0.2s, background-color 0.2s, color 0.2s;
+    position: relative;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.bottom-nav-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.bottom-nav-btn span {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.bottom-nav-btn:hover {
+    opacity: 0.75;
+}
+
+.bottom-nav-btn.active {
+    opacity: 1;
+    background-color: var(--hover-color);
+}
+
+/* Разделитель между группами */
+.bottom-nav-sep {
+    width: 1px;
+    height: 22px;
+    background-color: var(--pill-border);
+    margin: 0 2px;
+    flex-shrink: 0;
 }

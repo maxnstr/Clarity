@@ -32,6 +32,9 @@
                     <a href="#audio" class="nav-link">Games</a>
                 </div>
 
+                <!-- Мобильный лейбл: показывает текущий раздел с fade (только на мобиле) -->
+                <div class="nav-mobile-label" id="nav-mobile-label">Кларити</div>
+
                 <!-- Состояние 2: Поиск -->
                 <div class="nav-search-input-wrapper" id="nav-search-wrapper">
                     <input type="text" id="search-input" placeholder="Поиск по названиям...">
@@ -326,6 +329,35 @@
             </div>
         </div>
     </section>
+
+    <!-- Нижняя навигация (только мобиль) -->
+    <nav class="bottom-nav" id="bottom-nav">
+        <a href="#main" class="bottom-nav-btn" data-section="main" aria-label="Главная">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span>Главная</span>
+        </a>
+        <div class="bottom-nav-sep"></div>
+        <a href="#os" class="bottom-nav-btn" data-section="os" aria-label="Soft">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span>Soft</span>
+        </a>
+        <a href="#proxy" class="bottom-nav-btn" data-section="proxy" aria-label="VPN">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>VPN</span>
+        </a>
+        <a href="#ai" class="bottom-nav-btn" data-section="ai" aria-label="AI">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            <span>AI</span>
+        </a>
+        <a href="#video" class="bottom-nav-btn" data-section="video" aria-label="Web">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span>Web</span>
+        </a>
+        <a href="#audio" class="bottom-nav-btn" data-section="audio" aria-label="Games">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="15.5" cy="11" r="0.5" fill="currentColor"/><circle cx="17.5" cy="13" r="0.5" fill="currentColor"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"></path></svg>
+            <span>Games</span>
+        </a>
+    </nav>
 
     <script src="script.js"></script>
 </body>
