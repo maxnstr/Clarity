@@ -310,19 +310,38 @@ header {
     opacity: 0.9;
 }
 
-/* Заглушка для вашего логотипа */
+/* Контейнер-фигура с гифкой на фоне */
 .logo-placeholder {
     width: 250px;
     height: 250px;
-    background-color: #eee;
-    color: #333;
+    
+    /* Заливаем фигуру вашей гифкой */
+    background-image: url('Geometria.gif');
+    background-size: cover;
+    background-position: center;
+    
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 120px;
-    font-weight: bold;
-    border-radius: 20px 50px 30px 60px; /* Имитация неровной формы бумажки */
+    
+    /* Сохраняем вашу форму и угол наклона */
+    border-radius: 20px 50px 30px 60px; 
     transform: rotate(-5deg);
+    
+    /* Обрезаем фон строго по границам скругления */
+    overflow: hidden; 
+}
+
+/* Внутренняя k.svg */
+.inner-logo {
+    /* Размер k.svg относительно родителя (45% работает идеально, 
+       чтобы на мобилках лого тоже пропорционально уменьшалось) */
+    width: 70%; 
+    height: auto;
+    object-fit: contain;
+    /* Убираем возможные баги при перетаскивании картинки мышкой */
+    pointer-events: none; 
+    user-select: none;
 }
 
 .hero-text {

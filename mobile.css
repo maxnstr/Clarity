@@ -76,7 +76,7 @@
     }
 
     .hero-logo { justify-content: center; }
-    .logo-placeholder { width: 130px; height: 130px; font-size: 60px; }
+    .logo-placeholder { width: 130px; height: 130px; }
     .hero-text { font-size: 15px; }
 
     /* Секции */
@@ -116,7 +116,7 @@
     }
 
     .hero-logo { justify-content: center; flex-shrink: 0; }
-    .logo-placeholder { width: 90px; height: 90px; font-size: 40px; border-radius: 14px 30px 18px 36px; }
+    .logo-placeholder { width: 90px; height: 90px; border-radius: 14px 30px 18px 36px; }
     .hero-text { font-size: 14px; }
 
     .content-section { padding: 40px 15px; }
