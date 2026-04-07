@@ -130,7 +130,8 @@ const sectionNames = {
     'proxy': 'Proxy & VPN',
     'ai':    'AI',
     'video': 'Web tools',
-    'audio': 'Games'
+    'audio': 'Games',
+    'windows': 'Windows'
 };
 
 function setMobileLabel(sectionId) {
