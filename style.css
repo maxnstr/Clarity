@@ -316,7 +316,7 @@ header {
     height: 250px;
     
     /* Заливаем фигуру вашей гифкой */
-    background-image: url('Geometria.gif');
+    background-image: url('res/Geometria.gif');
     background-size: cover;
     background-position: center;
     
