@@ -406,6 +406,7 @@ header {
 .software-card.card-wide {
     border: 1px solid var(--pill-border);
     background-color: rgba(128, 128, 128, 0.05);
+    padding: 25px;
 }
 
 .software-card.card-wide:hover {
@@ -531,7 +532,7 @@ body:not(.light-theme) .card-logo {
 .btn-row {
     display: flex;       /* Выстраиваем элементы в строку */
     gap: 15px;           /* Расстояние между двумя кнопками */
-    margin-bottom: 15px; /* Отступ снизу, чтобы третья кнопка не прилипала */
+    margin-bottom: 0;
 }
 
 /* Делаем так, чтобы кнопки внутри ряда занимали ровно по 50% ширины */
@@ -561,7 +562,7 @@ body:not(.light-theme) .card-logo {
     display: inline-flex;
     align-items: center;
     padding: 2px 9px;
-    border-radius: 20px;
+    border-radius: 5px;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.02em;
@@ -665,3 +666,261 @@ body.light-theme .tag-badge.qload {
     margin: 0 2px;
     flex-shrink: 0;
 }
+
+/* Amnezia VPN — тусклее рамка */
+.amnezia-card {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+body.light-theme .amnezia-card {
+    border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Amnezia — ghost кнопки (первые две) */
+.amnezia-ghost {
+    background-color: transparent !important;
+    color: var(--text-color) !important;
+    border: 1px solid rgba(128, 128, 128, 0.3) !important;
+}
+.amnezia-ghost:hover {
+    background-color: var(--text-color) !important;
+    color: var(--bg-color) !important;
+    border-color: var(--text-color) !important;
+    opacity: 1 !important;
+}
+
+/* Amnezia — белая кнопка WARP */
+.amnezia-solid {
+    background-color: var(--text-color) !important;
+    color: var(--bg-color) !important;
+    border-color: var(--text-color) !important;
+}
+.amnezia-solid:hover {
+    opacity: 0.85 !important;
+}
+
+/* Мобильная капсула расширяется на весь враппер при поиске/фильтре */
+/* Класс добавляется через JS на nav-wrapper */
+
+/* =====================
+   GOOGLE GROUP CARD
+   ===================== */
+.card-google-group {
+    grid-column: 1 / -1;
+    background-color: rgba(128, 128, 128, 0.05);
+    border: 1px solid var(--pill-border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.card-google-group:hover {
+    transform: translateY(-4px);
+    background-color: var(--hover-color);
+}
+
+/* Ватермарк G скрыт */
+.google-watermark { display: none; }
+
+.google-group-header {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.google-brand {
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+}
+.google-brand .g-blue   { color: #4285F4; }
+.google-brand .g-red    { color: #EA4335; }
+.google-brand .g-yellow { color: #FBBC05; }
+.google-brand .g-green  { color: #34A853; }
+
+.google-group-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 700px) {
+    .google-group-grid { grid-template-columns: 1fr; }
+}
+
+.google-item h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.google-item p {
+    font-size: 13px;
+    opacity: 0.75;
+    line-height: 1.5;
+    margin: 0 0 16px 0;
+    flex-grow: 1;
+}
+
+.google-item {
+    display: flex;
+    flex-direction: column;
+}
+
+/* =====================
+   WIN98 КАРТОЧКА
+   ===================== */
+
+/* Внешняя обёртка — бирюзовый фон как в эскизе */
+.card-win98-outer {
+    grid-column: 1 / -1;
+    background-color: #008080; /* Win98 teal desktop */
+    border-radius: 16px;
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Само окно Win98 */
+.win98-window {
+    background-color: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    width: 100%;
+    max-width: 480px;
+    font-family: 'Fixedsys Excelsior', 'Courier New', monospace;
+    color: #000000;
+}
+
+/* Строка заголовка */
+.win98-titlebar {
+    background: linear-gradient(to right, #000080, #1084d0);
+    padding: 3px 4px 3px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.win98-titlebar-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Fixedsys Excelsior', 'Courier New', monospace;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    letter-spacing: 0;
+}
+
+.win98-titlebar-icon {
+    width: 14px;
+    height: 14px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='0' y='0' width='7' height='7' fill='%23F25022'/%3E%3Crect x='9' y='0' width='7' height='7' fill='%237FBA00'/%3E%3Crect x='0' y='9' width='7' height='7' fill='%2300A4EF'/%3E%3Crect x='9' y='9' width='7' height='7' fill='%23FFB900'/%3E%3C/svg%3E") center/contain no-repeat;
+    flex-shrink: 0;
+}
+
+.win98-titlebar-buttons { display: flex; gap: 2px; }
+
+.win98-btn-chrome {
+    width: 16px;
+    height: 14px;
+    background-color: #c0c0c0;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    font-size: 9px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #000;
+    font-family: 'Fixedsys Excelsior', 'Courier New', monospace;
+}
+
+/* Тело окна */
+.win98-body {
+    padding: 16px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Главный заголовок диалога */
+.win98-title-text {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Fixedsys Excelsior', 'Courier New', monospace;
+    color: #000000;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.25);
+    -webkit-font-smoothing: none;
+}
+
+/* Кнопки Win98 */
+.win98-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-win98 {
+    background-color: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    padding: 5px 24px;
+    font-size: 13px;
+    font-family: 'Fixedsys Excelsior', 'Courier New', monospace;
+    color: #000000;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    transition: none;
+    min-width: 110px;
+}
+
+.btn-win98:active,
+.btn-win98:hover {
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    background-color: #c0c0c0;
+    color: #000;
+    opacity: 1;
+}
+
+.btn-win98-placeholder {
+    color: #808080;
+    cursor: not-allowed;
+}
+
+/* Clouds фон */
+.card-win98-outer.clouds-mode {
+    background-image: url('res/clouds.gif');
+    background-size: 50%;
+    background-position: center;
+    background-color: #87CEEB;
+}
+
+
+

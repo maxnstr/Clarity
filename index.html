@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Кларити</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="res/favicon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mobile.css">
 </head>
@@ -206,16 +206,14 @@
         <p class="section-description">Инструменты для обхода блокировок и безопасного серфинга в сети.</p>
         
         <div class="software-grid">
-           <div class="software-card card-wide" data-tags="open-source">
+           <div class="software-card card-wide amnezia-card" data-tags="open-source">
                 <div class="card-header"><h3>Amnezia VPN</h3><span class="tag-badge open-source">open source</span></div>
                 <p>Бесплатный клиент для создания собственного VPN на личном сервере.</p>
-                
                 <div class="btn-row">
-                    <a href="https://amnezia.org/ru" target="_blank" class="download-btn">Официальный сайт</a>
-                    <a href="https://github.com/amnezia-vpn/amneziawg-windows-client/releases" target="_blank" class="download-btn">AmneziaWG (GitHub)</a>
+                    <a href="https://amnezia.org/ru" target="_blank" class="download-btn amnezia-ghost">Официальный сайт</a>
+                    <a href="https://github.com/amnezia-vpn/amneziawg-windows-client/releases" target="_blank" class="download-btn amnezia-ghost">AmneziaWG (GitHub)</a>
+                    <a href="https://github.com/ImMALWARE/bash-warp-generator/blob/main/README.md" target="_blank" class="download-btn amnezia-solid">Генератор конфига Cloudflare WARP</a>
                 </div>
-                
-                <a href="https://github.com/ImMALWARE/bash-warp-generator/blob/main/README.md" target="_blank" class="download-btn btn-outline">Генератор конфига Cloudflare WARP для AmneziaVPN.</a>
             </div>
 
             <div class="software-card">
@@ -244,22 +242,28 @@
         <p class="section-description">Языковые модели и инструменты на базе ИИ для работы, учебы и творчества.</p>
         
         <div class="software-grid">
-            <div class="software-card">
-                <h3>Google AI Studio</h3>
-                <p>Пространство для разработчиков и энтузиастов для работы с моделями Gemini.</p>
-                <a href="https://aistudio.google.com" target="_blank" class="download-btn">Открыть</a>
-            </div>
-
-            <div class="software-card">
-                <h3>NotebookLM</h3>
-                <p>Ваш персональный ИИ-ассистент для анализа документов и создания заметок (от Google).</p>
-                <a href="https://notebooklm.google" target="_blank" class="download-btn">Открыть</a>
-            </div>
-
-            <div class="software-card">
-                <h3>Google Stitch</h3>
-                <p>Экспериментальный ИИ-инструмент от Google для работы с кодом и текстом.</p>
-                <a href="https://stitch.withgoogle.com" target="_blank" class="download-btn">Открыть</a>
+            <div class="card-google-group">
+                <span class="google-watermark" aria-hidden="true">G</span>
+                <div class="google-group-header">
+                    Made by&nbsp;<span class="google-brand"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span></span>
+                </div>
+                <div class="google-group-grid" style="position:relative;z-index:1;">
+                    <div class="google-item">
+                        <h3>AI Studio</h3>
+                        <p>Пространство для разработчиков и энтузиастов для работы с моделями Gemini.</p>
+                        <a href="https://aistudio.google.com" target="_blank" class="download-btn">Открыть</a>
+                    </div>
+                    <div class="google-item">
+                        <h3>NotebookLM</h3>
+                        <p>Ваш персональный ИИ-ассистент для анализа документов и создания заметок.</p>
+                        <a href="https://notebooklm.google" target="_blank" class="download-btn">Открыть</a>
+                    </div>
+                    <div class="google-item">
+                        <h3>Stitch</h3>
+                        <p>Экспериментальный ИИ-инструмент от Google для работы с кодом и текстом.</p>
+                        <a href="https://stitch.withgoogle.com" target="_blank" class="download-btn">Открыть</a>
+                    </div>
+                </div>
             </div>
 
             <div class="software-card">
@@ -278,6 +282,24 @@
                 <h3>Suno AI</h3>
                 <p>Потрясающая нейросеть, способная генерировать полноценные песни по вашему описанию.</p>
                 <a href="https://suno.com/" target="_blank" class="download-btn">Открыть</a>
+            </div>
+
+            <div class="software-card">
+                <h3>Gamma</h3>
+                <p>ИИ-инструмент для создания презентаций, документов и веб-страниц по текстовому описанию.</p>
+                <a href="https://gamma.app/ru" target="_blank" class="download-btn">Открыть</a>
+            </div>
+
+            <div class="software-card">
+                <h3>Perplexity</h3>
+                <p>ИИ-поисковик с ответами на основе актуальных данных из интернета и цитатами источников.</p>
+                <a href="https://www.perplexity.ai/" target="_blank" class="download-btn">Открыть</a>
+            </div>
+
+            <div class="software-card">
+                <h3>Higgsfield AI</h3>
+                <p>Генерация коротких видео и cinematic-эффектов по текстовому промпту.</p>
+                <a href="https://higgsfield.ai/" target="_blank" class="download-btn">Открыть</a>
             </div>
         </div>
     </section>
@@ -354,6 +376,37 @@
                 </div>
                 <p>Сборка актуального образа Windows напрямую с серверов Microsoft. Гибкая настройка версии, языка и архитектуры.</p>
                 <a href="https://uupdump.net/" target="_blank" class="download-btn">Открыть</a>
+            </div>
+            <div class="software-card" data-tags="open-source">
+                <div class="card-header">
+                    <h3>Rufus</h3>
+                    <span class="tag-badge open-source">open source</span>
+                </div>
+                <p>Утилита для создания загрузочных USB-накопителей. Поддерживает образы Windows, Linux и UEFI.</p>
+                <div class="btn-row">
+                    <a href="https://rufus.ie/ru/" target="_blank" class="download-btn">Официальный сайт</a>
+                    <a href="https://github.com/pbatard/rufus/releases" target="_blank" class="download-btn">GitHub</a>
+                </div>
+            </div>
+            <div class="card-win98-outer" id="win98-outer">
+                <div class="win98-window">
+                    <div class="win98-titlebar">
+                        <div class="win98-titlebar-title">
+                            <div class="win98-titlebar-icon"></div>
+                            autounattend.xml
+                        </div>
+                        <div class="win98-titlebar-buttons">
+                            <div class="win98-btn-chrome" id="win98-close-btn" title="Закрыть">✕</div>
+                        </div>
+                    </div>
+                    <div class="win98-body">
+                        <div class="win98-title-text">Файл ответа для образа windows</div>
+                        <div class="win98-actions">
+                            <a href="https://schneegans.de/windows/unattend-generator/" target="_blank" class="btn-win98">Генерировать</a>
+                            <a href="res/autounattend.xml" download="autounattend.xml" class="btn-win98">Скачать</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

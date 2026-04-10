@@ -89,6 +89,46 @@
     /* Кнопки вертикально */
     .btn-row { flex-direction: column; gap: 10px; }
     .download-btn { padding: 11px 16px; min-height: 40px; font-size: 14px; }
+
+    /* Плавное расширение капсулы при поиске/фильтре */
+    .nav-wrapper {
+        transition: gap 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Иконки плавно исчезают */
+    .home-btn, #search-btn, .filter-btn, #theme-btn {
+        transition:
+            opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            flex    0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            width   0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            padding 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            margin  0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            transform 0.2s;
+        overflow: hidden;
+    }
+
+    /* Капсула расширяется чуть позже — создаёт эффект поглощения */
+    .nav-pill {
+        transition: flex 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.08s !important;
+    }
+
+    .nav-wrapper.capsule-expanded .home-btn,
+    .nav-wrapper.capsule-expanded #search-btn,
+    .nav-wrapper.capsule-expanded .filter-btn,
+    .nav-wrapper.capsule-expanded #theme-btn {
+        opacity: 0;
+        pointer-events: none;
+        flex: 0 0 0 !important;
+        width: 0 !important;
+        min-width: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .nav-wrapper.capsule-expanded .nav-pill {
+        flex: 1 1 100%;
+    }
+
 }
 
 /* =========================================

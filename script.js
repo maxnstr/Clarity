@@ -1,18 +1,20 @@
 // =============================================
 // УТИЛИТА: переключение состояний капсулы
 // =============================================
+const navWrapper      = document.querySelector('.nav-wrapper');
 const navCategories   = document.getElementById('nav-categories');
 const searchWrapper   = document.getElementById('nav-search-wrapper');
 const filterWrapper   = document.getElementById('nav-filter-wrapper');
 const mobileLabel     = document.getElementById('nav-mobile-label');
 
 function setCapsuleState(state) {
-    // nav-categories скрыт на мобиле через CSS; на десктопе управляется здесь
     const isMobile = window.innerWidth <= 768;
-    navCategories.style.display = (!isMobile && state === 'nav') ? 'flex' : (isMobile ? 'none' : 'none');
+    navCategories.style.display = (!isMobile && state === 'nav') ? 'flex' : 'none';
     searchWrapper.style.display = state === 'search' ? 'flex' : 'none';
     filterWrapper.style.display = state === 'filter' ? 'flex' : 'none';
     if (mobileLabel) mobileLabel.style.display = (isMobile && state === 'nav') ? 'flex' : 'none';
+    // Расширяем капсулу на мобиле при поиске/фильтре
+    if (navWrapper) navWrapper.classList.toggle('capsule-expanded', isMobile && state !== 'nav');
 }
 
 // Инициализация при загрузке
@@ -22,6 +24,7 @@ function initCapsule() {
     if (mobileLabel) mobileLabel.style.display = isMobile ? 'flex' : 'none';
     searchWrapper.style.display = 'none';
     filterWrapper.style.display = 'none';
+    if (navWrapper) navWrapper.classList.remove('capsule-expanded');
 }
 
 window.addEventListener('resize', initCapsule);
@@ -51,11 +54,42 @@ searchInput.addEventListener('input', () => applySearch(searchInput.value));
 
 function applySearch(query) {
     const q = query.trim().toLowerCase();
+
+    // Скрываем/показываем карточки по названию и описанию
     allCards.forEach(card => {
         const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
         const desc  = card.querySelector('p')?.textContent.toLowerCase()  || '';
         const match = !q || title.includes(q) || desc.includes(q);
         card.classList.toggle('hidden-by-search', !match);
+    });
+
+    // Скрываем секции целиком если ни одна карточка не прошла фильтр
+    document.querySelectorAll('.content-section').forEach(section => {
+        if (!q) {
+            section.style.display = '';
+            return;
+        }
+        const visibleCards = section.querySelectorAll(
+            '.software-card:not(.hidden-by-search), .card-google-group:not(.hidden-by-search), .card-win98-outer:not(.hidden-by-search)'
+        );
+        // Для google-group — проверяем совпадение внутри google-item
+        let hasVisible = visibleCards.length > 0;
+
+        // Отдельно проверяем google-group (она не .software-card)
+        const googleGroup = section.querySelector('.card-google-group');
+        if (googleGroup) {
+            const googleItems = googleGroup.querySelectorAll('.google-item');
+            let googleMatch = false;
+            googleItems.forEach(item => {
+                const t = item.querySelector('h3')?.textContent.toLowerCase() || '';
+                const d = item.querySelector('p')?.textContent.toLowerCase() || '';
+                if (t.includes(q) || d.includes(q)) googleMatch = true;
+            });
+            googleGroup.classList.toggle('hidden-by-search', !googleMatch);
+            if (googleMatch) hasVisible = true;
+        }
+
+        section.style.display = hasVisible ? '' : 'none';
     });
 }
 
@@ -253,3 +287,17 @@ function updateIconContrast() {
 window.addEventListener('scroll', updateIconContrast, { passive: true });
 window.addEventListener('resize', updateIconContrast);
 window.addEventListener('load',   updateIconContrast);
+
+// =============================================
+// WIN98 — ЗАКРЫТИЕ ОКНА И CLOUDS
+// =============================================
+const win98CloseBtn = document.getElementById('win98-close-btn');
+const win98Outer    = document.getElementById('win98-outer');
+const win98Window   = win98Outer?.querySelector('.win98-window');
+
+if (win98CloseBtn && win98Outer && win98Window) {
+    win98CloseBtn.addEventListener('click', () => {
+        // Просто показываем clouds на фоне, окно остаётся
+        win98Outer.classList.toggle('clouds-mode');
+    });
+}
